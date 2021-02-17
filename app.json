@@ -10,6 +10,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "android": {
+      "useNextNotificationsApi": true,
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -17,7 +20,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "usesIcloudStorage": true,
     },
     "web": {
       "favicon": "./assets/favicon.png"
