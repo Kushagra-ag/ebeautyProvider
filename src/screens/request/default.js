@@ -84,35 +84,36 @@ export default function Default({ navigation, route }) {
                 );
             }
         } else {
-            console.log('in else')
+            console.log('in else');
         }
     };
 
     const acceptOrder = async () => {
-        console.log('in ao')
+        console.log('in ao');
         const myLocation = await getLocation();
+        console.log('myLoc-', myLocation);
         console.log('gh');
 
-        let data = {
-            orderId: route.params.notification.data._id,
-            sellerLocation: `[${myLocation.latitude}, ${myLocation.longitude}]`
-        };
+        if (myLocation) {
+            let data = {
+                orderId: route.params.notification.data._id,
+                sellerLocation: `[${myLocation.latitude}, ${myLocation.longitude}]`
+            };
 
-        const success = () => {
-            console.log('acccepted');
+            const success = () => {
+                console.log('acccepted');
+                setErr('');
+                navigation.navigate('Location', {
+                    location: route.params.notification.data.customerLocation
+                });
+            };
 
-            navigation.navigate('Location', {
-                                            location:
-                                                route.params.notification.data
-                                                    .customerLocation
-                                        })
-        };
+            const failure = () => {
+                console.log('failed');
+            };
 
-        const failure = () => {
-            console.log('failed');
-        };
-
-        acceptRequest(data, success, failure);
+            acceptRequest(data, success, failure);
+        }
     };
 
     return (
@@ -168,37 +169,50 @@ export default function Default({ navigation, route }) {
                             >{`\$${route.params.notification.data.totalPrice}`}</Text>
                         </Right>
                     </ListItem>
-                    <Grid style={{ marginVertical: 20 }}>
-                        <Row>
-                            <Col style={styles.leftBtn}>
-                                <Button primary block style={stylesCtm.button} onPress={acceptOrder}>
-                                    <Text style={stylesCtm.buttonText}>
-                                        Accept Order
-                                    </Text>
-                                </Button>
-                            </Col>
-                            <Col style={styles.rightBtn}>
-                                <Button
-                                    dark
-                                    block
-                                    onPress={() => 
-                                        navigation.navigate('Location', {
-                                            location:
-                                                route.params.notification.data
-                                                    .customerLocation
-                                        })
-                                    }
-                                    style={stylesCtm.button}
-                                >
-                                    <Text style={stylesCtm.buttonText}>
-                                        View Location
-                                    </Text>
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Grid>
                 </List>
-                
+                <Grid style={{ marginVertical: 20 }}>
+                    <Row>
+                        <Col style={styles.leftBtn}>
+                            <Button
+                                primary
+                                block
+                                style={stylesCtm.button}
+                                onPress={acceptOrder}
+                            >
+                                <Text style={stylesCtm.buttonText}>
+                                    Accept Order
+                                </Text>
+                            </Button>
+                        </Col>
+                        <Col style={styles.rightBtn}>
+                            <Button
+                                dark
+                                block
+                                onPress={() =>
+                                    navigation.navigate('Location', {
+                                        location:
+                                            route.params.notification.data
+                                                .customerLocation
+                                    })
+                                }
+                                style={stylesCtm.button}
+                            >
+                                <Text style={stylesCtm.buttonText}>
+                                    View Location
+                                </Text>
+                            </Button>
+                        </Col>
+                    </Row>
+                </Grid>
+                <Text
+                    style={{
+                        color: '#f85f6a',
+                        fontWeight: 'bold',
+                        padding: 10
+                    }}
+                >
+                    {err}
+                </Text>
             </ScrollView>
             <BottomNav />
         </React.Fragment>

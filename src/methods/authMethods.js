@@ -12,8 +12,8 @@ const options = {
 
 export const profileCheck = async () => {
 	try {
-        // await AsyncStorage.removeItem('@e_beauty__acc');
-        let profile = await AsyncStorage.getItem('@e_beauty__acc');
+        // await AsyncStorage.removeItem('@e_beauty__beautician');
+        let profile = await AsyncStorage.getItem('@e_beauty__beautician');
 
         if (profile) {
             profile = await JSON.parse(profile);

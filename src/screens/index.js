@@ -14,6 +14,7 @@ import { GOOGLE_KEY } from '../methods/config.js';
 import StylesCtm from '../styles';
 import Home from './home.js';
 import Profile from './profile';
+import Request from '../screens/request';
 
 Geocoder.init(GOOGLE_KEY);
 const Drawer = createDrawerNavigator();
@@ -75,9 +76,9 @@ function CustomDrawerContentAndroid(props) {
                     />
                     <DrawerItem
                         label="My Cart"
-                        onPress={() => {
-                            props.navigation.navigate('Cart');
-                        }}
+                        onPress={() => null
+                            // props.navigation.navigate('Cart');
+                        }
                         icon={({ focused, size, color }) => (
                             <MaterialIcons
                                 color={color}
@@ -91,9 +92,11 @@ function CustomDrawerContentAndroid(props) {
                     {
                         <DrawerItem
                             label="My Profile"
-                            onPress={() => {
-                                props.navigation.navigate('Profile');
-                            }}
+                            onPress={() => 
+                                props.navigation.navigate('Profile', {
+                                    screen: 'Services'
+                                })
+                            }
                             icon={({ focused, size, color }) => (
                                 <MaterialIcons
                                     color={color}
@@ -107,9 +110,9 @@ function CustomDrawerContentAndroid(props) {
                     {
                         <DrawerItem
                             label="My Orders"
-                            onPress={() => {
-                                props.navigation.navigate('Orders');
-                            }}
+                            onPress={() => null
+                                // props.navigation.navigate('Orders');
+                            }
                             icon={({ focused, size, color }) => (
                                 <MaterialIcons
                                     color={color}
@@ -123,12 +126,7 @@ function CustomDrawerContentAndroid(props) {
                     <DrawerItem
                         label="Logout"
                         onPress={() =>
-                            logout(function () {
-                                props.navigation.reset({
-                                    index: 0,
-                                    routes: [{ name: 'Auth' }]
-                                });
-                            })
+                            logout()
                         }
                         icon={({ focused, size, color }) => (
                             <MaterialCommunityIcons
@@ -211,6 +209,7 @@ export default function myStack({ navigation }) {
                     >
                         <Drawer.Screen name="Home" component={Home} />
                         <Drawer.Screen name="Profile" component={Profile} />
+                        <Stack.Screen name="Request" component={Request} />
                     </Drawer.Navigator>
 		</SafeAreaView>
 	);

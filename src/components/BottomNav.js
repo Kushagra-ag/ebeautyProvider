@@ -22,11 +22,11 @@ export default function BottomNav() {
             
                 <FooterTab>
                     <Button
-                        onPress={() => null
-                            // navigation.reset({
-                            //     index: 0,
-                            //     routes: [{ name: 'Home' }]
-                            // })
+                        onPress={() =>
+                            navigation.reset({
+                                index: 0,
+                                routes: [{ name: 'Home' }]
+                            })
                         }
                     >
                         <Ionicons
@@ -37,15 +37,15 @@ export default function BottomNav() {
                             color={route.name === "Home" ? "#f85f6a" : "#000"}
                         />
                     </Button>
-                    <Button onPress={() => null
-                    //     navigation.navigate('Services', {
-                    //     screen: 'Index'
-                    // })
+                    <Button onPress={() => 
+                        navigation.navigate('Profile', {
+                            screen: 'Services'
+                        })
                     }>
                         <MaterialIcons name="person-pin" size={24} color={route.name === "Services" ? "#f85f6a" : "#000"} />
                     </Button>
                     <Button onPress={() => null
-                        // navigation.navigate('Cart')
+                        // navigation.navigate('Profile')
                     }>
                         <Ionicons name={Platform.OS === 'ios' ? 'ios-cart' : 'md-cart'} size={24} color={route.name === "Cart" ? "#f85f6a" : "#000"} />
                     </Button>

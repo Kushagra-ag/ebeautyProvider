@@ -26,13 +26,10 @@ export const acceptRequest = async (data, success, failure) => {
             if(res.data.success) {
                 console.log(res.data.message);
 
-                if(res.data.orderAccepted) {
-
-                    success()
-                } else {
-
-                    failure()
-                }
+                success()
+            }
+            else {
+                failure()
             }
         })
         .catch(err => {

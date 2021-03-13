@@ -8,9 +8,9 @@ import { EvilIcons, AntDesign } from '@expo/vector-icons';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/commonColor.js';
 import Auth from '../screens/auth';
+
 import AppScreens from '../screens';
-import Request from '../screens/request';
-import { navigationRef } from '../methods/authMethods.js';
+import { navigationRef, profileCheck } from '../methods/authMethods.js';
 
 
 const Stack = createStackNavigator();
@@ -40,6 +40,7 @@ function myStack() {
                 if (res) {
                     LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
                     setRoute('App');
+                    console.log("in routes-index profileCheck")
                 }
 
                 loadFont(isCancelled);
@@ -61,7 +62,7 @@ function myStack() {
                     <Stack.Navigator initialRouteName={route} headerMode="none">
                         <Stack.Screen name="Auth" component={Auth} />
                         <Stack.Screen name="App" component={AppScreens} />
-                        <Stack.Screen name="Request" component={Request} />
+                        
                     </Stack.Navigator>
                 </NavigationContainer>
             </StyleProvider>

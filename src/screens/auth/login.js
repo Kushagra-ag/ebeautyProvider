@@ -21,7 +21,7 @@ import axios from 'axios';
 
 export default function Login({ navigation }) {
     const [cred, setCred] = useState({
-        email: 'kush@test.com',
+        email: 'test@test.com',
         password: 'test'
     });
     const [err, setErr] = useState("");
@@ -56,7 +56,7 @@ export default function Login({ navigation }) {
 
         function success() {
             setErr("");
-            setLoading(false); 
+            setLoading(false);
             navigation.replace('App', {
                 screen: 'Home'
             });
@@ -67,7 +67,7 @@ export default function Login({ navigation }) {
 
     return (
         <Container style={stylesCtm.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
                 <Form style={styles.container}>
                     <Text style={stylesCtm.heading}>Login</Text>
                     <Item inlineLabel style={{ marginBottom: 10 }}>

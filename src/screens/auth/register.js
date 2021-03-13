@@ -59,7 +59,7 @@ const GooglePlacesInput = props => {
             styles={{
                 listView: {
                     // position: 'absolute',
-                    top: 50,
+                    // top: 50,
                     borderBottomWidth: 1,
                     borderLeftWidth: 1,
                     borderRightWidth: 1,
@@ -74,14 +74,15 @@ const GooglePlacesInput = props => {
             }}
             textInputProps={{
                 onBlur: () => {
-                    if (!cred.customerLocation) {
-                        setCred({ ...cred, customerLocation: '' });
+                    if (!cred.userLocation) {
+                        setCred({ ...cred, userLocation: '' });
                         clearField();
+                        // console.log(cred);
                     }
-                    console.log(cred);
+                    // console.log(cred);
                 },
                 onFocus: () => {
-                    setCred({ ...cred, customerLocation: '' });
+                    setCred({ ...cred, userLocation: '' });
                     clearField();
                 }
             }}
@@ -120,7 +121,7 @@ function Register({ navigation }) {
             !cred.email ||
             !cred.password ||
             !cred.phone ||
-            // !cred.customerLocation ||             // for dev ppurposes-- change later
+            // !cred.userLocation ||             // for dev ppurposes-- change later
             !cred.name ||
             !cred.repeatPassword
         ) {
@@ -137,6 +138,8 @@ function Register({ navigation }) {
             setErr('Please select the checkbox');
             return;
         }
+
+        console.log('from onsubmit register method',cred)
 
         function failure(err) {
             err ? setErr(err) : setErr('Invalid details');
@@ -159,15 +162,15 @@ function Register({ navigation }) {
             });
         }
 
-        // setLoading(true);
-        // register(cred, success, failure);
+        setLoading(true);
+        register(cred, success, failure);
 
-        navigation.navigate('App', {
-            screen: 'Profile',
-            params: {
-                screen: 'Services'
-            }
-        });
+        // navigation.navigate('App', {
+        //     screen: 'Profile',
+        //     params: {
+        //         screen: 'Services'
+        //     }
+        // });
         // navigation.navigate('Request')
     };
 
